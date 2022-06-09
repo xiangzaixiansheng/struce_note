@@ -1,0 +1,1 @@
+# struce_note
