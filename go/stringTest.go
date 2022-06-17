@@ -12,7 +12,7 @@ func checkError(e error) {
 	}
 }
 
-func main() {
+func test() {
 	//是否包含
 	fmt.Println(strings.Contains("hello_word", "hello"))
 
