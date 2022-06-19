@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
  * @lc app=leetcode.cn id=4 lang=golang
  *
@@ -41,3 +43,63 @@ package main
 * 思路：双指针操作, 一种是只记录到中位数的前后(left,right)，如果是去余数位1则中位数为right，否则是(left+right)/2
 *				还是双指针，合并两个有序数据在找对应的数据。
 **/
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+	n, m := len(nums1), len(nums2)
+	length := n + m
+	//双指针, l1对应nums1, l2对应nums2
+	l1, l2 := 0, 0
+	left, right := 0, 0
+	for i := 0; i <= length/2; i++ {
+		//每次进入循环都把上一次的right值赋值给left值
+		left = right
+		//注意 l2 >=m 要放在前面避免数据越界
+		if l1 < n && (l2 >= m || nums1[l1] < nums2[l2]) {
+			right = nums1[l1]
+			l1++
+		} else {
+			right = nums2[l2]
+			l2++
+		}
+	}
+	fmt.Println("left:", left, "right:", right)
+	if length%2 == 1 {
+		return float64(right)
+	}
+	return float64(left+right) / 2.0
+
+}
+
+// 方法二:合并数组
+func findMedianSortedArrays2(l1 []int, l2 []int) (out float64) {
+	n, m := len(l1), len(l2)
+	ls := make([]int, n+m)
+	var i, j, k int
+	for ; k < n+m; k++ {
+		if i < n && j < m {
+			if l1[i] < l2[j] {
+				ls[k] = l1[i]
+				i++
+			} else {
+				ls[k] = l2[j]
+				j++
+			}
+		} else if i < n {
+			ls[k] = l1[i]
+			i++
+		} else if j < m {
+			ls[k] = l2[j]
+			j++
+		}
+	}
+	if k%2 == 1 {
+		return float64(ls[k/2])
+	} else {
+		return float64(ls[k/2-1]+ls[k/2]) / 2
+	}
+}
+
+// func main() {
+// 	a := []int{0, 0}
+// 	b := []int{0, 0}
+// 	fmt.Println(findMedianSortedArrays(a, b))
+// }
