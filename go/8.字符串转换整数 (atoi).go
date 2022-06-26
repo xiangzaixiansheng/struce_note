@@ -71,3 +71,35 @@
 
 // @lc code=start
 package main
+
+import "math"
+
+func myAtoi(s string) int {
+	abs, sign, length, i := 0, 1, len(s), 0
+	//首先去除前面的字符串
+	for i < length && s[i] == ' ' {
+		i++
+	}
+	//处理正负号
+	if i < length {
+		if s[i] == '-' {
+			sign = -1
+			i++
+		} else if s[i] == '+' {
+			sign = 1
+			i++
+		}
+	}
+	//然后最后开始处理数字 字节 byte '0' == 48
+	for i < length && s[i] >= '0' && s[i] <= '9' {
+		//10进制，所以乘10 移动
+		abs = 10*abs + int(s[i]-'0') //字节 byte '0' == 48
+		if sign*abs > math.MaxInt32 {
+			return math.MaxInt32
+		} else if sign*abs < math.MinInt32 {
+			return math.MinInt32
+		}
+		i++
+	}
+	return sign * abs
+}
