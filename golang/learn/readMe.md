@@ -55,4 +55,16 @@ panic：词义"恐慌"，
 		go语言利用panic()，recover()，实现程序中的极特殊的异常的处理
 			panic(),让当前的程序进入恐慌，中断程序的执行
 			recover(),让程序恢复，必须在defer函数中执行
+			
+defer func() {
+   if r := recover(); r != nil {
+      if er, ok := r.(error); ok {
+         err = er
+      } else {
+         err = errors.New("")
+         fmt.Println("未知错误: ")
+         fmt.Println(r)
+      }
+   }
+}()
 ```
