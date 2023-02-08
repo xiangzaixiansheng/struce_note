@@ -20,7 +20,7 @@ child_process 模块提供了以下 4 个方法用于创建子进程，**并且�
 
 
 
-## 二、cluster
+## 二、cluster---也推荐是用pm2
 
 ```
 cluster对child_process的进一步补充，实现多进程
