@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode.cn id=5 lang=golang
+ * @lc app=leetcode.cn id=5 lang=js
  *
  * [5] 最长回文子串
  *
