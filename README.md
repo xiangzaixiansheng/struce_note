@@ -1,6 +1,7 @@
 # struce_note
 
 
-treer -i "/node_modules|.git|img/"  result.txt
+# 生成目录结构
+treer -i "/node_modules|.git|img/" > result.txt
 
 
