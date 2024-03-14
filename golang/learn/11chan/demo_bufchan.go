@@ -33,7 +33,6 @@ func test_buffer() {
 	fmt.Println("-----------------")
 	ch3 := make(chan string, 4)
 	go sendData3(ch3)
-
 	for {
 		v, ok := <-ch3
 		if !ok {
